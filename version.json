@@ -1,6 +1,6 @@
 {
-  "versionCode": 2,
-  "versionName": "1.0.1",
-  "apkUrl": "https://github.com/mittohoa/meanything-app/raw/main/me-anything-1.0.1.apk",
-  "notes": "v1.0.1 — Thêm Daily Media Digest: gom nội dung theo ngày + AI tổng hợp 'hôm nay có gì đáng xem'. Sửa lỗi mã hóa tiêu đề, TikTok/FB/IG mở app gốc mượt hơn."
+  "versionCode": 3,
+  "versionName": "1.0.2",
+  "apkUrl": "https://github.com/mittohoa/meanything-app/raw/main/me-anything-1.0.2.apk",
+  "notes": "v1.0.2 — Sửa lỗi tự cập nhật: nhấn 'Cập nhật' bị tắt app (thiếu FileProvider cho trình cài APK). Giờ tải nền + mở trình cài mượt."
 }
