@@ -1,6 +1,6 @@
 {
-  "versionCode": 1,
-  "versionName": "1.0.0",
-  "apkUrl": "https://github.com/mittohoa/meanything-app/raw/main/me-anything-1.0.0.apk",
-  "notes": "Bản đầu tiên — Watch Later Hub: lưu link YouTube/TikTok/FB/IG (share vào app tự lưu), AI tóm tắt & gắn tag, transcript YouTube, tìm kiếm ngôn ngữ tự nhiên, xóa trùng, phát YouTube trong app."
+  "versionCode": 2,
+  "versionName": "1.0.1",
+  "apkUrl": "https://github.com/mittohoa/meanything-app/raw/main/me-anything-1.0.1.apk",
+  "notes": "v1.0.1 — Thêm Daily Media Digest: gom nội dung theo ngày + AI tổng hợp 'hôm nay có gì đáng xem'. Sửa lỗi mã hóa tiêu đề, TikTok/FB/IG mở app gốc mượt hơn."
 }
