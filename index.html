@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MÊ anything — Lưu, tóm tắt & tìm mọi thứ bằng AI</title>
+<meta name="description" content="App cá nhân đa nền tảng: lưu video/link, AI tóm tắt & gắn tag, tìm bằng ngôn ngữ tự nhiên.">
+<style>
+  :root{
+    --bg:#0e0f13; --card:#171923; --fg:#f5f6fa; --muted:#9aa0ac;
+    --brand:#5B6CF0; --brand2:#7C8BFF; --border:rgba(255,255,255,.08);
+  }
+  @media (prefers-color-scheme:light){
+    :root{ --bg:#f6f7fb; --card:#ffffff; --fg:#14151a; --muted:#5b616e; --border:rgba(0,0,0,.08); }
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+    background:var(--bg);color:var(--fg);line-height:1.55;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:880px;margin:0 auto;padding:24px}
+  header{display:flex;flex-direction:column;align-items:center;text-align:center;padding:56px 0 32px}
+  .logo{width:88px;height:88px;border-radius:24px;display:grid;place-items:center;
+    background:linear-gradient(135deg,var(--brand2),var(--brand));box-shadow:0 12px 30px rgba(91,108,240,.35)}
+  h1{font-size:2.1rem;margin:20px 0 6px;letter-spacing:-.5px}
+  .tag{color:var(--muted);font-size:1.05rem;margin:0}
+  .cta{display:inline-flex;align-items:center;gap:10px;margin-top:26px;padding:15px 26px;
+    background:var(--brand);color:#fff;text-decoration:none;border-radius:14px;font-weight:600;
+    box-shadow:0 10px 24px rgba(91,108,240,.4);transition:transform .12s}
+  .cta:hover{transform:translateY(-2px)}
+  .hint{color:var(--muted);font-size:.85rem;margin-top:12px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin:40px 0}
+  .card{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:20px}
+  .card h3{margin:0 0 6px;font-size:1.05rem}
+  .card p{margin:0;color:var(--muted);font-size:.92rem}
+  .ico{font-size:1.6rem;margin-bottom:6px}
+  footer{text-align:center;color:var(--muted);font-size:.85rem;padding:32px 0}
+  a{color:var(--brand2)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="logo" aria-hidden="true">
+      <svg width="52" height="52" viewBox="0 0 100 100" fill="none">
+        <path d="M24 76 V24 L50 60 L76 24 V76" stroke="#fff" stroke-width="11"
+          stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+    <h1>MÊ anything</h1>
+    <p class="tag">Lưu, tóm tắt và tìm mọi thứ bằng AI</p>
+    <a class="cta" href="me-anything-1.0.0.apk" download>
+      ⬇️ Tải APK v1.0.0 (Android)
+    </a>
+    <p class="hint">Android · cho phép "Cài từ nguồn không xác định" khi cài lần đầu</p>
+  </header>
+
+  <section class="grid">
+    <div class="card"><div class="ico">🔗</div><h3>Lưu là xong</h3>
+      <p>Share video từ YouTube/TikTok/Facebook/Instagram vào app — tự lưu, tự lấy thumbnail & tiêu đề.</p></div>
+    <div class="card"><div class="ico">✨</div><h3>AI tóm tắt & gắn tag</h3>
+      <p>Mỗi video được tóm tắt và gắn tag tự động. Đọc transcript YouTube.</p></div>
+    <div class="card"><div class="ico">🔎</div><h3>Tìm bằng ngôn ngữ tự nhiên</h3>
+      <p>Gõ "video dạy SQL" là ra — tìm trong tiêu đề, tóm tắt và cả transcript.</p></div>
+    <div class="card"><div class="ico">▶️</div><h3>Phát trong app</h3>
+      <p>YouTube phát ngay trong app; TikTok/FB/IG mở app gốc một chạm.</p></div>
+    <div class="card"><div class="ico">🧹</div><h3>Gọn gàng</h3>
+      <p>Tự xóa video trùng, lọc theo nền tảng.</p></div>
+    <div class="card"><div class="ico">☁️</div><h3>Đồng bộ đa thiết bị</h3>
+      <p>Offline-first, đồng bộ qua sync code. Giao diện tối giản, có dark mode & Việt/Anh.</p></div>
+  </section>
+
+  <footer>
+    MÊ anything · <a href="version.json">version.json</a> ·
+    Cập nhật trong app tự động khi có bản mới.
+  </footer>
+</div>
+</body>
+</html>
