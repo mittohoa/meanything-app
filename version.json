@@ -1,6 +1,6 @@
 {
-  "versionCode": 3,
-  "versionName": "1.0.2",
-  "apkUrl": "https://github.com/mittohoa/meanything-app/raw/main/me-anything-1.0.2.apk",
-  "notes": "v1.0.2 — Sửa lỗi tự cập nhật: nhấn 'Cập nhật' bị tắt app (thiếu FileProvider cho trình cài APK). Giờ tải nền + mở trình cài mượt."
+  "versionCode": 4,
+  "versionName": "1.0.3",
+  "apkUrl": "https://github.com/mittohoa/meanything-app/raw/main/me-anything-1.0.3.apk",
+  "notes": "v1.0.3 — Đủ 10 module! Thêm: Movie Tracker, Audio Vault (phát nền/màn khóa), AI Radio (podcast theo chủ đề), Music Memory (Wrapped), Kids Audio, Smart Gallery (OCR + nhận diện đồ vật), Meme Vault, AI Wallpaper (đổi hình nền theo thời tiết/giờ/pin). Tiến trình có hiển thị %."
 }
