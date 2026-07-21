@@ -1,6 +1,6 @@
 {
-  "versionCode": 9,
-  "versionName": "1.0.8",
-  "apkUrl": "https://github.com/mittohoa/meanything-app/raw/main/me-anything-1.0.8.apk",
-  "notes": "v1.0.8 — Smart Gallery bố cục kiểu Google Photos: ảnh tràn ô, lưới thông minh/vừa vặn nhiều kích thước lấp kín màn hình, lưới vuông sát nhau. Crop theo trọng tâm (khuôn mặt)."
+  "versionCode": 10,
+  "versionName": "1.0.9",
+  "apkUrl": "https://github.com/mittohoa/meanything-app/raw/main/me-anything-1.0.9.apk",
+  "notes": "v1.0.9 — Sửa triệt để viền đen trong Smart Gallery: thumbnail lấy đúng tỉ lệ gốc của ảnh (đọc kích thước thật) nên ảnh tràn ô, không còn đệm đen."
 }
