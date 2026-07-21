@@ -1,6 +1,6 @@
 {
-  "versionCode": 8,
-  "versionName": "1.0.7",
-  "apkUrl": "https://github.com/mittohoa/meanything-app/raw/main/me-anything-1.0.7.apk",
-  "notes": "v1.0.7 — Mini-player toàn cục (điều khiển nhạc ở mọi màn) + thẻ 'Đang phát' trên trang chủ. Smart Gallery: hết viền đen, AI crop theo khuôn mặt/trọng tâm, khung ảnh đa dạng. Nút 'Lấy key AI free' 1 chạm."
+  "versionCode": 9,
+  "versionName": "1.0.8",
+  "apkUrl": "https://github.com/mittohoa/meanything-app/raw/main/me-anything-1.0.8.apk",
+  "notes": "v1.0.8 — Smart Gallery bố cục kiểu Google Photos: ảnh tràn ô, lưới thông minh/vừa vặn nhiều kích thước lấp kín màn hình, lưới vuông sát nhau. Crop theo trọng tâm (khuôn mặt)."
 }
