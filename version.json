@@ -1,6 +1,6 @@
 {
-  "versionCode": 10,
-  "versionName": "1.0.9",
-  "apkUrl": "https://github.com/mittohoa/meanything-app/raw/main/me-anything-1.0.9.apk",
-  "notes": "v1.0.9 — Sửa triệt để viền đen trong Smart Gallery: thumbnail lấy đúng tỉ lệ gốc của ảnh (đọc kích thước thật) nên ảnh tràn ô, không còn đệm đen."
+  "versionCode": 11,
+  "versionName": "1.0.10",
+  "apkUrl": "https://github.com/mittohoa/meanything-app/raw/main/me-anything-1.0.10.apk",
+  "notes": "v1.0.10 — Quét ảnh nhanh hơn hẳn (không chờ AI khi lập chỉ mục). Trang giới thiệu & tính năng chi tiết mới trên web."
 }

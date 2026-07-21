@@ -3,85 +3,372 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MÊ anything — Lưu, tóm tắt & tìm mọi thứ bằng AI</title>
-<meta name="description" content="App cá nhân đa nền tảng: lưu video/link, AI tóm tắt & gắn tag, tìm bằng ngôn ngữ tự nhiên.">
+<title>MÊ anything — 10 không gian AI cho media của bạn</title>
+<meta name="description" content="App cá nhân đa nền tảng: lưu, tóm tắt và tìm mọi thứ (video, audio, ảnh, meme, phim) bằng AI. 10 module trong 3 nhóm Xem · Nghe · Nhìn.">
 <style>
   :root{
-    --bg:#0e0f13; --card:#171923; --fg:#f5f6fa; --muted:#9aa0ac;
-    --brand:#5B6CF0; --brand2:#7C8BFF; --border:rgba(255,255,255,.08);
+    --bg:#F6F7FC; --surface:#FFFFFF; --surface-2:#EDEFF7; --surface-3:#E4E7F2;
+    --ink:#14151C; --ink-2:#565B70; --ink-3:#878CA3;
+    --line:rgba(20,21,28,.08); --line-2:rgba(20,21,28,.14);
+    --brand:#5B6CF0; --brand-ink:#3F4FD8;
+    --xem-a:#EF4444; --xem-b:#F97316; --xem-solid:#E84E2E;
+    --nghe-a:#8B5CF6; --nghe-b:#06B6D4; --nghe-solid:#6E6BE6;
+    --nhin-a:#10B981; --nhin-b:#14B8A6; --nhin-solid:#0FA986;
+    --shadow:0 1px 2px rgba(20,21,28,.04),0 8px 24px rgba(20,21,28,.06);
+    --shadow-lg:0 2px 6px rgba(20,21,28,.06),0 20px 50px rgba(20,21,28,.12);
+    --r:22px;
   }
-  @media (prefers-color-scheme:light){
-    :root{ --bg:#f6f7fb; --card:#ffffff; --fg:#14151a; --muted:#5b616e; --border:rgba(0,0,0,.08); }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --bg:#0B0C13; --surface:#14161F; --surface-2:#1B1E29; --surface-3:#232636;
+      --ink:#F2F3FA; --ink-2:#A2A8BD; --ink-3:#6E7488;
+      --line:rgba(255,255,255,.08); --line-2:rgba(255,255,255,.14);
+      --brand:#8592FF; --brand-ink:#8592FF;
+      --xem-solid:#F4633F; --nghe-solid:#8B84F2; --nhin-solid:#1AC69A;
+      --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 30px rgba(0,0,0,.4);
+      --shadow-lg:0 2px 8px rgba(0,0,0,.5),0 24px 60px rgba(0,0,0,.55);
+    }
   }
   *{box-sizing:border-box}
-  body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
-    background:var(--bg);color:var(--fg);line-height:1.55;-webkit-font-smoothing:antialiased}
-  .wrap{max-width:880px;margin:0 auto;padding:24px}
-  header{display:flex;flex-direction:column;align-items:center;text-align:center;padding:56px 0 32px}
-  .logo{width:88px;height:88px;border-radius:24px;display:grid;place-items:center;
-    background:linear-gradient(135deg,var(--brand2),var(--brand));box-shadow:0 12px 30px rgba(91,108,240,.35)}
-  h1{font-size:2.1rem;margin:20px 0 6px;letter-spacing:-.5px}
-  .tag{color:var(--muted);font-size:1.05rem;margin:0}
-  .cta{display:inline-flex;align-items:center;gap:10px;margin-top:26px;padding:15px 26px;
-    background:var(--brand);color:#fff;text-decoration:none;border-radius:14px;font-weight:600;
-    box-shadow:0 10px 24px rgba(91,108,240,.4);transition:transform .12s}
-  .cta:hover{transform:translateY(-2px)}
-  .hint{color:var(--muted);font-size:.85rem;margin-top:12px}
-  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin:40px 0}
-  .card{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:20px}
-  .card h3{margin:0 0 6px;font-size:1.05rem}
-  .card p{margin:0;color:var(--muted);font-size:.92rem}
-  .ico{font-size:1.6rem;margin-bottom:6px}
-  footer{text-align:center;color:var(--muted);font-size:.85rem;padding:32px 0}
-  a{color:var(--brand2)}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;background:var(--bg);color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+    line-height:1.55;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+  }
+  .wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+  h1,h2,h3,h4{text-wrap:balance;margin:0}
+  .eyebrow{font-size:.72rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3)}
+
+  header.top{position:sticky;top:0;z-index:40;background:color-mix(in srgb,var(--bg) 82%,transparent);backdrop-filter:saturate(1.4) blur(14px);border-bottom:1px solid var(--line)}
+  .top .row{display:flex;align-items:center;gap:14px;height:62px}
+  .brand{display:flex;align-items:center;gap:11px;font-weight:800;letter-spacing:-.01em}
+  .mark{width:34px;height:34px;border-radius:11px;flex:none;display:grid;place-items:center;background:linear-gradient(140deg,#7C8BFF,#5B6CF0);box-shadow:0 6px 16px rgba(91,108,240,.4)}
+  .mark svg{width:20px;height:20px}
+  nav.spaces{margin-left:auto;display:flex;gap:4px}
+  nav.spaces a{text-decoration:none;color:var(--ink-2);font-weight:600;font-size:.9rem;padding:7px 13px;border-radius:999px;transition:.18s}
+  nav.spaces a:hover{color:var(--ink);background:var(--surface-2)}
+  .s-xem b{color:var(--xem-solid)} .s-nghe b{color:var(--nghe-solid)} .s-nhin b{color:var(--nhin-solid)}
+  @media (max-width:680px){nav.spaces{display:none}}
+
+  .hero{padding:74px 0 34px;text-align:center;overflow:hidden;position:relative}
+  .hero .glow{position:absolute;inset:-30% 0 auto 0;height:520px;pointer-events:none;z-index:0;background:radial-gradient(420px 300px at 22% 20%,rgba(239,68,68,.16),transparent 70%),radial-gradient(440px 320px at 78% 26%,rgba(16,185,129,.15),transparent 70%),radial-gradient(520px 360px at 50% 4%,rgba(91,108,240,.22),transparent 68%);filter:blur(2px)}
+  .hero-mark{width:82px;height:82px;border-radius:24px;margin:0 auto 22px;display:grid;place-items:center;background:linear-gradient(140deg,#8592FF,#5B6CF0);position:relative;z-index:1;box-shadow:0 14px 40px rgba(91,108,240,.45);animation:floaty 6s ease-in-out infinite}
+  .hero-mark svg{width:46px;height:46px}
+  @keyframes floaty{50%{transform:translateY(-8px)}}
+  .hero h1{position:relative;z-index:1;font-size:clamp(2.5rem,7vw,4.4rem);font-weight:850;letter-spacing:-.03em;line-height:1.02}
+  .hero .tag{position:relative;z-index:1;margin:16px auto 0;max-width:30ch;font-size:clamp(1.05rem,2.4vw,1.35rem);color:var(--ink-2);font-weight:500}
+  .hero .lead{position:relative;z-index:1;margin:20px auto 0;max-width:52ch;color:var(--ink-2);font-size:1.02rem}
+  .hero .lead b{color:var(--ink);font-weight:700}
+  .cta-row{position:relative;z-index:1;display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:30px}
+  .btn{display:inline-flex;align-items:center;gap:9px;text-decoration:none;font-weight:700;font-size:1rem;padding:14px 24px;border-radius:15px;transition:.18s;border:1px solid transparent}
+  .btn-primary{background:var(--brand);color:#fff;box-shadow:0 10px 24px rgba(91,108,240,.42)}
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 14px 30px rgba(91,108,240,.5)}
+  .btn-ghost{background:var(--surface);color:var(--ink);border-color:var(--line-2)}
+  .btn-ghost:hover{background:var(--surface-2)}
+  .metrics{position:relative;z-index:1;display:flex;flex-wrap:wrap;gap:10px 30px;justify-content:center;margin:34px auto 0;color:var(--ink-2);font-size:.92rem}
+  .metrics span{display:inline-flex;align-items:center;gap:8px}
+  .metrics b{color:var(--ink);font-weight:800;font-variant-numeric:tabular-nums}
+  .dot{width:5px;height:5px;border-radius:50%;background:var(--brand)}
+
+  .sec{padding:52px 0 8px}
+  .sec-title{display:flex;align-items:baseline;gap:12px;margin-bottom:22px;flex-wrap:wrap}
+  .sec-title h2{font-size:clamp(1.5rem,3.4vw,2rem);font-weight:820;letter-spacing:-.02em}
+  .sec-title p{margin:0;color:var(--ink-2)}
+
+  .pill-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
+  .pill{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:18px;box-shadow:var(--shadow)}
+  .pill .ic{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;background:var(--surface-2);color:var(--brand);margin-bottom:12px}
+  .pill .ic svg{width:19px;height:19px}
+  .pill h4{margin:0 0 4px;font-size:1rem;font-weight:750}
+  .pill p{margin:0;color:var(--ink-2);font-size:.9rem}
+
+  .space{padding:56px 0 8px}
+  .space-head{display:flex;align-items:center;gap:16px;margin-bottom:8px}
+  .space-badge{width:56px;height:56px;border-radius:18px;flex:none;display:grid;place-items:center;color:#fff}
+  .space-badge svg{width:30px;height:30px}
+  .g-xem{background:linear-gradient(135deg,var(--xem-a),var(--xem-b));box-shadow:0 14px 34px rgba(239,68,68,.32)}
+  .g-nghe{background:linear-gradient(135deg,var(--nghe-a),var(--nghe-b));box-shadow:0 14px 34px rgba(124,110,230,.32)}
+  .g-nhin{background:linear-gradient(135deg,var(--nhin-a),var(--nhin-b));box-shadow:0 14px 34px rgba(16,185,129,.3)}
+  .space-head h2{font-size:clamp(1.7rem,4vw,2.3rem);font-weight:820;letter-spacing:-.02em}
+  .space-head .count{margin-left:auto;font-weight:800;font-size:.85rem;color:var(--ink-3);font-variant-numeric:tabular-nums}
+  .space-sub{color:var(--ink-2);margin:0 0 26px 72px;max-width:60ch}
+  @media (max-width:560px){.space-sub{margin-left:0}}
+
+  .mods{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:16px}
+  .mod{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:22px;box-shadow:var(--shadow);transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease;display:flex;flex-direction:column;gap:14px;position:relative;overflow:hidden}
+  .mod::before{content:"";position:absolute;inset:0 0 auto 0;height:3px;opacity:.9}
+  .mod.x::before{background:linear-gradient(90deg,var(--xem-a),var(--xem-b))}
+  .mod.n::before{background:linear-gradient(90deg,var(--nghe-a),var(--nghe-b))}
+  .mod.v::before{background:linear-gradient(90deg,var(--nhin-a),var(--nhin-b))}
+  .mod:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
+  .mod.x:hover{border-color:color-mix(in srgb,var(--xem-solid) 40%,var(--line))}
+  .mod.n:hover{border-color:color-mix(in srgb,var(--nghe-solid) 40%,var(--line))}
+  .mod.v:hover{border-color:color-mix(in srgb,var(--nhin-solid) 40%,var(--line))}
+  .mod-top{display:flex;align-items:center;gap:13px}
+  .mod-ic{width:46px;height:46px;border-radius:14px;flex:none;display:grid;place-items:center;color:#fff}
+  .mod.x .mod-ic{background:linear-gradient(140deg,var(--xem-a),var(--xem-b))}
+  .mod.n .mod-ic{background:linear-gradient(140deg,var(--nghe-a),var(--nghe-b))}
+  .mod.v .mod-ic{background:linear-gradient(140deg,var(--nhin-a),var(--nhin-b))}
+  .mod-ic svg{width:25px;height:25px}
+  .mod h3{font-size:1.18rem;font-weight:780;letter-spacing:-.01em;line-height:1.15}
+  .mod .what{color:var(--ink-2);font-size:.95rem;margin:0}
+  .mod .what b{color:var(--ink);font-weight:650}
+  .feats{display:flex;flex-wrap:wrap;gap:7px;margin-top:auto}
+  .feats span{font-size:.78rem;font-weight:600;padding:5px 10px;border-radius:999px;background:var(--surface-2);color:var(--ink-2);border:1px solid var(--line)}
+  .example{display:flex;align-items:center;gap:9px;padding:10px 12px;border-radius:12px;background:var(--surface-2);font-size:.85rem;color:var(--ink-2)}
+  .example svg{width:15px;height:15px;flex:none;color:var(--ink-3)}
+  .example i{font-style:normal;color:var(--ink);font-weight:600}
+
+  /* system feature list */
+  .sys-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px}
+  .sys{display:flex;gap:13px;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:16px 18px;box-shadow:var(--shadow)}
+  .sys .si{width:38px;height:38px;border-radius:11px;flex:none;display:grid;place-items:center;background:var(--surface-2);color:var(--brand)}
+  .sys .si svg{width:20px;height:20px}
+  .sys h4{margin:0 0 3px;font-size:.98rem;font-weight:730}
+  .sys p{margin:0;color:var(--ink-2);font-size:.87rem}
+
+  /* changelog */
+  .log{position:relative;margin-top:6px;padding-left:26px}
+  .log::before{content:"";position:absolute;left:6px;top:6px;bottom:6px;width:2px;background:var(--line-2)}
+  .rel{position:relative;padding:0 0 20px}
+  .rel::before{content:"";position:absolute;left:-24px;top:5px;width:11px;height:11px;border-radius:50%;background:var(--brand);box-shadow:0 0 0 4px color-mix(in srgb,var(--brand) 20%,transparent)}
+  .rel.now::before{background:var(--nhin-solid);box-shadow:0 0 0 4px color-mix(in srgb,var(--nhin-solid) 22%,transparent)}
+  .rel .ver{font-weight:800;font-variant-numeric:tabular-nums;letter-spacing:-.01em}
+  .rel .ver .pin{font-size:.68rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--nhin-solid);margin-left:8px}
+  .rel p{margin:3px 0 0;color:var(--ink-2);font-size:.92rem}
+
+  .close{padding:60px 0 30px}
+  .close-card{background:radial-gradient(600px 300px at 15% 0%,rgba(91,108,240,.18),transparent 70%),var(--surface);border:1px solid var(--line);border-radius:28px;padding:44px 34px;text-align:center;box-shadow:var(--shadow-lg)}
+  .close-card h2{font-size:clamp(1.6rem,4vw,2.3rem);font-weight:820;letter-spacing:-.02em}
+  .close-card p{color:var(--ink-2);max-width:48ch;margin:14px auto 0}
+  .close-card .hint{margin-top:14px;font-size:.85rem;color:var(--ink-3)}
+  footer{padding:30px 0 60px;text-align:center;color:var(--ink-3);font-size:.85rem}
+  footer a{color:var(--brand-ink);text-decoration:none;font-weight:600}
+
+  .reveal{opacity:0;transform:translateY(18px)}
+  .reveal.in{opacity:1;transform:none;transition:opacity .6s ease,transform .6s cubic-bezier(.2,.7,.2,1)}
+  @media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}.hero-mark{animation:none}html{scroll-behavior:auto}}
 </style>
 </head>
 <body>
-<div class="wrap">
-  <header>
-    <div class="logo" aria-hidden="true">
-      <svg width="52" height="52" viewBox="0 0 100 100" fill="none">
-        <path d="M24 76 V24 L50 60 L76 24 V76" stroke="#fff" stroke-width="11"
-          stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
+
+<header class="top">
+  <div class="wrap row">
+    <div class="brand">
+      <span class="mark" aria-hidden="true"><svg viewBox="0 0 100 100" fill="none"><path d="M24 76 V24 L50 60 L76 24 V76" stroke="#fff" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      MÊ anything
     </div>
-    <h1>MÊ anything</h1>
-    <p class="tag">Lưu, tóm tắt và tìm mọi thứ bằng AI</p>
-    <a class="cta" href="me-anything-1.0.9.apk" download>
-      ⬇️ Tải APK v1.0.9 (Android)
-    </a>
-    <p class="hint">Android 8+ · tương thích thiết bị mới (trang bộ nhớ 16KB) · cho phép "Cài từ nguồn không xác định" khi cài lần đầu</p>
-  </header>
+    <nav class="spaces">
+      <a class="s-xem" href="#xem"><b>Xem</b></a>
+      <a class="s-nghe" href="#nghe"><b>Nghe</b></a>
+      <a class="s-nhin" href="#nhin"><b>Nhìn</b></a>
+      <a href="#hethong">Hệ thống</a>
+      <a href="#phienban">Phiên bản</a>
+    </nav>
+  </div>
+</header>
 
-  <p style="text-align:center;color:var(--muted);margin:-8px 0 8px">10 không gian AI, gom trong 3 nhóm: <b>Xem · Nghe · Hình</b></p>
-  <section class="grid">
-    <div class="card"><div class="ico">🔗</div><h3>Watch Later Hub</h3>
-      <p>Share video YouTube/TikTok/Reel vào app — tự lưu, AI tóm tắt, gắn tag, đọc transcript. Tìm "video dạy SQL" là ra.</p></div>
-    <div class="card"><div class="ico">✨</div><h3>Daily Media Digest</h3>
-      <p>Gom nội dung mỗi ngày, AI trả lời "hôm nay có gì đáng xem?".</p></div>
-    <div class="card"><div class="ico">🎬</div><h3>Movie &amp; Series Tracker</h3>
-      <p>Theo dõi phim/series, chấm điểm, thống kê giờ xem, AI gợi ý. Tìm poster qua TMDB.</p></div>
-    <div class="card"><div class="ico">🎧</div><h3>Audio Vault</h3>
-      <p>Lưu voice note/podcast/mp3/link — phát trong app, <b>chạy nền + điều khiển màn hình khóa</b>, tìm bằng ngôn ngữ tự nhiên.</p></div>
-    <div class="card"><div class="ico">📻</div><h3>AI Radio</h3>
-      <p>Nhập chủ đề → AI dựng "đài" từ podcast thật, phát nối tiếp như radio cá nhân hóa.</p></div>
-    <div class="card"><div class="ico">📈</div><h3>Music Memory</h3>
-      <p>"Wrapped" quanh năm: bài nghe nhiều, nghệ sĩ, giờ nghe, tâm trạng — AI viết báo cáo.</p></div>
-    <div class="card"><div class="ico">🧸</div><h3>Kids Audio</h3>
-      <p>Chọn độ tuổi → AI tạo playlist truyện/nhạc ru/học tiếng Anh cho bé.</p></div>
-    <div class="card"><div class="ico">🖼️</div><h3>Smart Gallery</h3>
-      <p>AI đọc chữ (OCR) &amp; nhận diện đồ vật trong ảnh — tìm "hóa đơn Highlands", "ảnh có laptop".</p></div>
-    <div class="card"><div class="ico">😂</div><h3>Meme Vault</h3>
-      <p>Lưu meme, AI đọc chữ &amp; nhận diện nội dung — tìm "meme con mèo khóc" là ra.</p></div>
-    <div class="card"><div class="ico">🌅</div><h3>AI Wallpaper</h3>
-      <p>Tự đổi hình nền theo thời tiết, giờ, pin, ngày lễ. Nguồn ảnh đẹp miễn phí.</p></div>
-  </section>
-  <p style="text-align:center;color:var(--muted);font-size:.9rem">Offline-first · AI Gemini · Việt/Anh · dark mode · tối ưu mobile &amp; tablet · tự cập nhật trong app.</p>
+<section class="hero">
+  <div class="glow" aria-hidden="true"></div>
+  <div class="wrap">
+    <div class="hero-mark" aria-hidden="true"><svg viewBox="0 0 100 100" fill="none"><path d="M24 76 V24 L50 60 L76 24 V76" stroke="#fff" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    <h1>Bộ não media<br>cá nhân của bạn</h1>
+    <p class="tag">Lưu, tóm tắt và tìm mọi thứ bằng AI.</p>
+    <p class="lead">Một app, <b>10 không gian AI</b> gom gọn trong <b>3 nhóm</b> — <b>Xem</b>, <b>Nghe</b>, <b>Nhìn</b>. Chia sẻ hay chụp vào là xong; phần còn lại để AI lo.</p>
+    <div class="cta-row">
+      <a class="btn btn-primary" href="me-anything-1.0.10.apk" download>
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="none"><path d="M12 3v12m0 0 4-4m-4 4-4-4M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Tải APK v1.0.10
+      </a>
+      <a class="btn btn-ghost" href="#xem">Khám phá tính năng</a>
+    </div>
+    <div class="metrics">
+      <span><b>10</b> module</span><span class="dot"></span>
+      <span><b>3</b> nhóm</span><span class="dot"></span>
+      <span>AI <b>miễn phí</b></span><span class="dot"></span>
+      <span>Offline-first</span><span class="dot"></span>
+      <span>Việt / Anh</span>
+    </div>
+  </div>
+</section>
 
-  <footer>
-    MÊ anything · <a href="version.json">version.json</a> ·
-    Cập nhật trong app tự động khi có bản mới.
-  </footer>
-</div>
+<!-- ============ XEM ============ -->
+<section class="space" id="xem">
+  <div class="wrap">
+    <div class="space-head reveal">
+      <div class="space-badge g-xem" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="#fff" stroke-width="1.9"/><path d="M10 9.2v5.6c0 .5.5.8 1 .5l4.2-2.8c.4-.3.4-.9 0-1.2L11 8.6c-.5-.3-1 0-1 .6Z" fill="#fff"/></svg></div>
+      <h2>Xem</h2><span class="count">3 module</span>
+    </div>
+    <p class="space-sub reveal">Nơi mọi video, phim và nội dung để dành sống chung — được AI tóm tắt, gắn tag và luôn tìm lại được.</p>
+    <div class="mods">
+      <article class="mod x reveal">
+        <div class="mod-top"><div class="mod-ic"><svg viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="14" rx="3" stroke="#fff" stroke-width="1.8"/><path d="M10 9.5v5l4-2.5-4-2.5Z" fill="#fff"/></svg></div><h3>Watch Later Hub</h3></div>
+        <p class="what">Chia sẻ video từ <b>YouTube, TikTok, Facebook, Instagram</b> vào app là tự lưu — kèm thumbnail, tiêu đề, tóm tắt và tag do AI tạo. YouTube phát ngay trong app; TikTok/FB/IG mở app gốc một chạm.</p>
+        <div class="example"><svg viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="1.8"/><path d="m20 20-3.5-3.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><span>Gõ <i>“video dạy SQL”</i> là ra ngay</span></div>
+        <div class="feats"><span>AI tóm tắt &amp; tag</span><span>Đọc transcript</span><span>Xóa video trùng</span><span>Phát trong app</span></div>
+      </article>
+      <article class="mod x reveal">
+        <div class="mod-top"><div class="mod-ic"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3v3m0 12v3M4.2 7.5l2.1 2.1m11.4 4.8 2.1 2.1M3 12h3m12 0h3M4.2 16.5l2.1-2.1m11.4-4.8 2.1-2.1" stroke="#fff" stroke-width="1.7" stroke-linecap="round"/><circle cx="12" cy="12" r="3" fill="#fff"/></svg></div><h3>Daily Media Digest</h3></div>
+        <p class="what">App tự gom nội dung bạn lưu <b>theo từng ngày</b> và để AI viết một đoạn “hôm nay có gì đáng xem?”. Nắm hết trong 2 phút, không lướt vô định.</p>
+        <div class="example"><svg viewBox="0 0 24 24" fill="none"><path d="M5 4h14v16l-7-3-7 3V4Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg><span>Bản tổng hợp <i>mỗi ngày một lần</i></span></div>
+        <div class="feats"><span>Gom theo ngày</span><span>AI tổng hợp</span><span>Xem nhanh 2 phút</span></div>
+      </article>
+      <article class="mod x reveal">
+        <div class="mod-top"><div class="mod-ic"><svg viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="14" rx="2.5" stroke="#fff" stroke-width="1.8"/><path d="M3 9h18M7 5 5.5 9M12 5l-1.5 4M17 5l-1.5 4" stroke="#fff" stroke-width="1.6" stroke-linecap="round"/></svg></div><h3>Movie &amp; Series Tracker</h3></div>
+        <p class="what">Theo dõi phim &amp; series bạn xem: tìm poster và thông tin qua <b>TMDB</b>, chấm điểm, đếm tiến độ tập, thống kê thời gian xem và để AI gợi ý phim nên xem tiếp.</p>
+        <div class="example"><svg viewBox="0 0 24 24" fill="none"><path d="M12 4l2.3 4.7 5.2.8-3.7 3.6.9 5.1L12 15.9 7.3 18.3l.9-5.1L4.5 9.5l5.2-.8L12 4Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg><span>Trạng thái <i>muốn xem · đang xem · đã xem</i></span></div>
+        <div class="feats"><span>Đồng bộ TMDB</span><span>Thống kê giờ xem</span><span>Chấm điểm</span><span>AI gợi ý</span></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ NGHE ============ -->
+<section class="space" id="nghe">
+  <div class="wrap">
+    <div class="space-head reveal">
+      <div class="space-badge g-nghe" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M4 13a8 8 0 0 1 16 0v5a2 2 0 0 1-2 2h-2v-6h2M4 14v4a2 2 0 0 0 2 2h2v-6H6" stroke="#fff" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <h2>Nghe</h2><span class="count">4 module</span>
+    </div>
+    <p class="space-sub reveal">Mọi thứ có âm thanh — voice note, podcast, nhạc, đài — phát nền mượt, hiểu được nội dung, và biết bạn nghe gì.</p>
+    <div class="mods">
+      <article class="mod n reveal">
+        <div class="mod-top"><div class="mod-ic"><svg viewBox="0 0 24 24" fill="none"><path d="M9 18V6l10-2v12" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><circle cx="6.5" cy="18" r="2.5" stroke="#fff" stroke-width="1.8"/><circle cx="16.5" cy="16" r="2.5" stroke="#fff" stroke-width="1.8"/></svg></div><h3>Audio Vault</h3></div>
+        <p class="what">Lưu <b>voice note, podcast, mp3, link YouTube</b>. Phát trong app, chạy nền và điều khiển trên màn hình khóa. AI tóm tắt, gắn tag và <b>phiên âm</b> để bạn tìm được theo lời nói.</p>
+        <div class="example"><svg viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="1.8"/><path d="m20 20-3.5-3.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><span>Tìm <i>“podcast về Flutter tuần trước”</i></span></div>
+        <div class="feats"><span>Phát nền + màn khóa</span><span>Phiên âm AI</span><span>Tóm tắt &amp; tag</span></div>
+      </article>
+      <article class="mod n reveal">
+        <div class="mod-top"><div class="mod-ic"><svg viewBox="0 0 24 24" fill="none"><rect x="3" y="8" width="18" height="12" rx="2.5" stroke="#fff" stroke-width="1.8"/><path d="m16 3-8 5" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/><circle cx="8" cy="14" r="2.5" stroke="#fff" stroke-width="1.8"/><path d="M15 12h3m-3 4h3" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/></svg></div><h3>AI Radio</h3></div>
+        <p class="what">Nói bạn muốn nghe gì — ví dụ <b>“công nghệ”</b> — và AI dựng một “đài” từ podcast thật, phát nối tiếp như radio cá nhân hóa. Có lời dẫn đầu đài.</p>
+        <div class="example"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12h3l2-6 4 12 2-6h3" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Chọn chủ đề <i>· phát liên tục như đài</i></span></div>
+        <div class="feats"><span>Podcast thật</span><span>Cá nhân hóa</span><span>AI lời dẫn</span></div>
+      </article>
+      <article class="mod n reveal">
+        <div class="mod-top"><div class="mod-ic"><svg viewBox="0 0 24 24" fill="none"><path d="M4 19V9m5 10V5m5 14v-7m5 7V8" stroke="#fff" stroke-width="1.9" stroke-linecap="round"/></svg></div><h3>Music Memory</h3></div>
+        <p class="what">“Wrapped” diễn ra quanh năm: bài nghe nhiều, nghệ sĩ yêu thích, giờ nghe và tâm trạng. AI viết báo cáo thói quen nghe của bạn.</p>
+        <div class="example"><svg viewBox="0 0 24 24" fill="none"><path d="M12 21s-7-4.5-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 5.5-7 10-7 10Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg><span><i>“Tháng này bạn nghe chill nhiều hơn 40%”</i></span></div>
+        <div class="feats"><span>Bài &amp; nghệ sĩ top</span><span>Giờ nghe</span><span>Tâm trạng</span><span>AI báo cáo</span></div>
+      </article>
+      <article class="mod n reveal">
+        <div class="mod-top"><div class="mod-ic"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke="#fff" stroke-width="1.8"/><path d="M5 20c0-3.3 3.1-6 7-6s7 2.7 7 6" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/></svg></div><h3>Kids Audio</h3></div>
+        <p class="what">Cha mẹ chọn <b>độ tuổi</b> và loại nội dung — truyện kể, nhạc ru, học tiếng Anh, audiobook, podcast — và AI tạo playlist thiếu nhi phù hợp.</p>
+        <div class="example"><svg viewBox="0 0 24 24" fill="none"><path d="M6 4h9l3 3v13H6V4Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M9 12h6m-6 3h4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg><span>Chọn tuổi <i>· AI tự soạn playlist</i></span></div>
+        <div class="feats"><span>Truyện · nhạc ru</span><span>Học tiếng Anh</span><span>Theo độ tuổi</span></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ NHÌN ============ -->
+<section class="space" id="nhin">
+  <div class="wrap">
+    <div class="space-head reveal">
+      <div class="space-badge g-nhin" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="14" rx="3" stroke="#fff" stroke-width="1.9"/><circle cx="8.5" cy="10" r="1.6" fill="#fff"/><path d="m4 17 4.5-4.5 3.5 3.5 3-3L20 16.5" stroke="#fff" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <h2>Nhìn</h2><span class="count">3 module</span>
+    </div>
+    <p class="space-sub reveal">Ảnh và hình được AI “nhìn hiểu” — đọc chữ, nhận ra đồ vật, khuôn mặt, địa điểm — nên tìm bằng lời thường là ra.</p>
+    <div class="mods">
+      <article class="mod v reveal">
+        <div class="mod-top"><div class="mod-ic"><svg viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="14" height="14" rx="3" stroke="#fff" stroke-width="1.8"/><circle cx="7.5" cy="8.5" r="1.5" fill="#fff"/><path d="m4 15 3.5-3.5 3 3L14 11l3 3.2" stroke="#fff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><circle cx="18" cy="18" r="3.4" stroke="#fff" stroke-width="1.7"/><path d="m20.5 20.5 1.3 1.3" stroke="#fff" stroke-width="1.7" stroke-linecap="round"/></svg></div><h3>Smart Gallery</h3></div>
+        <p class="what">Quét thư viện ảnh — AI <b>đọc chữ (OCR)</b>, nhận diện đồ vật, khuôn mặt (crop đẹp theo trọng tâm) và địa điểm. Bố cục theo ngày kiểu Google Photos.</p>
+        <div class="example"><svg viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="1.8"/><path d="m20 20-3.5-3.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><span><i>“hóa đơn Highlands”</i>, <i>“ảnh có laptop bạc”</i></span></div>
+        <div class="feats"><span>OCR đọc chữ</span><span>Nhận diện đồ vật</span><span>Crop theo khuôn mặt</span><span>Địa điểm</span></div>
+      </article>
+      <article class="mod v reveal">
+        <div class="mod-top"><div class="mod-ic"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="#fff" stroke-width="1.8"/><circle cx="9" cy="10" r="1.2" fill="#fff"/><circle cx="15" cy="10" r="1.2" fill="#fff"/><path d="M8.5 15c1-1 5-1 6 0" stroke="#fff" stroke-width="1.7" stroke-linecap="round"/></svg></div><h3>Meme Vault</h3></div>
+        <p class="what">Lưu meme thả ga. AI <b>đọc chữ trên meme</b> và nhận diện nội dung, cảm xúc — nên bạn gọi tên đại khái là tìm được.</p>
+        <div class="example"><svg viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="1.8"/><path d="m20 20-3.5-3.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><span>Gõ <i>“meme con mèo khóc”</i> là hiện</span></div>
+        <div class="feats"><span>AI đọc chữ</span><span>Nhận diện nội dung</span><span>Bắt cảm xúc</span></div>
+      </article>
+      <article class="mod v reveal">
+        <div class="mod-top"><div class="mod-ic"><svg viewBox="0 0 24 24" fill="none"><rect x="4" y="3" width="16" height="18" rx="3" stroke="#fff" stroke-width="1.8"/><circle cx="9" cy="8" r="1.6" fill="#fff"/><path d="m6 17 3.5-4 2.5 2.5L15 12l3 4" stroke="#fff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></div><h3>AI Wallpaper</h3></div>
+        <p class="what">Hình nền tự đổi mỗi ngày theo <b>thời tiết, giờ trong ngày, mức pin và ngày lễ</b>. Nguồn ảnh đẹp miễn phí, đặt cho màn chính hoặc màn khóa.</p>
+        <div class="example"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.7"/><path d="M12 3v2m0 14v2M3 12h2m14 0h2M5.6 5.6l1.4 1.4m10 10 1.4 1.4m0-12.8-1.4 1.4m-10 10-1.4 1.4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg><span>Trời nắng, giờ tối, ngày lễ… <i>hình hợp cảnh</i></span></div>
+        <div class="feats"><span>Theo thời tiết</span><span>Theo giờ &amp; pin</span><span>Ngày lễ</span><span>Tự đặt hình nền</span></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ HỆ THỐNG ============ -->
+<section class="sec" id="hethong">
+  <div class="wrap">
+    <div class="sec-title reveal">
+      <h2>Tính năng hệ thống</h2>
+      <p>Những thứ chạy xuyên suốt mọi module — kết nối cả app lại thành một.</p>
+    </div>
+    <div class="sys-grid">
+      <div class="sys reveal"><div class="si"><svg viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="1.8"/><path d="m20 20-3.5-3.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></div><div><h4>Tìm kiếm hợp nhất</h4><p>Một ô tìm trên trang chủ → ra kết quả từ video, audio, ảnh, meme và phim cùng lúc.</p></div></div>
+      <div class="sys reveal"><div class="si"><svg viewBox="0 0 24 24" fill="none"><path d="M4 6a8 8 0 0 1 16 0v6a3 3 0 0 1-3 3h-1v-6h2M4 12V6m0 6a3 3 0 0 0 3 3h1V9H6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><h4>Mini-player toàn cục</h4><p>Thanh “đang phát” đi theo bạn qua mọi màn; điều khiển cả trên màn hình khóa.</p></div></div>
+      <div class="sys reveal"><div class="si"><svg viewBox="0 0 24 24" fill="none"><path d="M3 11 12 4l9 7M5 10v9a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-9" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><h4>Trang chủ “Hôm nay”</h4><p>Lời chào theo giờ, lối tắt làm nhanh, gợi ý thông minh, thẻ đang phát và “Ký ức năm ngoái”.</p></div></div>
+      <div class="sys reveal"><div class="si"><svg viewBox="0 0 24 24" fill="none"><path d="m12 3 2.2 4.6L19 8l-3.5 3.4.9 5.1L12 14l-4.4 2.5.9-5.1L5 8l4.8-.4L12 3Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></div><div><h4>AI Gemini miễn phí</h4><p>Quản lý nhiều key, tự xoay vòng; nhập bằng tay / file / QR và nút “Lấy key free” một chạm.</p></div></div>
+      <div class="sys reveal"><div class="si"><svg viewBox="0 0 24 24" fill="none"><path d="M4 7c0-1.7 3.6-3 8-3s8 1.3 8 3-3.6 3-8 3-8-1.3-8-3Z" stroke="currentColor" stroke-width="1.7"/><path d="M4 7v10c0 1.7 3.6 3 8 3s8-1.3 8-3V7M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3" stroke="currentColor" stroke-width="1.7"/></svg></div><div><h4>Đồng bộ đa thiết bị</h4><p>Offline-first, đồng bộ qua Supabase bằng “sync code”; nhập cấu hình bằng file hoặc QR.</p></div></div>
+      <div class="sys reveal"><div class="si"><svg viewBox="0 0 24 24" fill="none"><path d="M12 4v9m0 0 3.5-3.5M12 13 8.5 9.5M5 16v2a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-2" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><h4>Tự cập nhật trong app</h4><p>Có bản mới là app báo ngay, tải nền và cài — không cần vào store.</p></div></div>
+      <div class="sys reveal"><div class="si"><svg viewBox="0 0 24 24" fill="none"><path d="M21 12.8A8 8 0 1 1 11.2 3a6.5 6.5 0 0 0 9.8 9.8Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg></div><div><h4>Dark mode &amp; song ngữ</h4><p>Giao diện sáng/tối theo hệ thống; đầy đủ tiếng Việt và tiếng Anh.</p></div></div>
+      <div class="sys reveal"><div class="si"><svg viewBox="0 0 24 24" fill="none"><rect x="7" y="3" width="10" height="18" rx="2.5" stroke="currentColor" stroke-width="1.7"/><rect x="3.5" y="7" width="4" height="10" rx="1.5" stroke="currentColor" stroke-width="1.5"/><rect x="16.5" y="7" width="4" height="10" rx="1.5" stroke="currentColor" stroke-width="1.5"/></svg></div><div><h4>Tối ưu mọi thiết bị</h4><p>Đẹp trên điện thoại và tablet (thanh điều hướng dọc), giao diện tối giản hiện đại.</p></div></div>
+      <div class="sys reveal"><div class="si"><svg viewBox="0 0 24 24" fill="none"><circle cx="6" cy="12" r="2.5" stroke="currentColor" stroke-width="1.7"/><circle cx="17" cy="6" r="2.5" stroke="currentColor" stroke-width="1.7"/><circle cx="17" cy="18" r="2.5" stroke="currentColor" stroke-width="1.7"/><path d="m8.2 10.8 6.6-3.6m0 9.6L8.2 13.2" stroke="currentColor" stroke-width="1.7"/></svg></div><div><h4>Lưu bằng chia sẻ</h4><p>Bấm “Chia sẻ” từ YouTube, TikTok… chọn MÊ anything là nội dung tự vào đúng chỗ.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PHIÊN BẢN ============ -->
+<section class="sec" id="phienban">
+  <div class="wrap">
+    <div class="sec-title reveal">
+      <h2>Hành trình phiên bản</h2>
+      <p>Tất cả những gì đã thêm và tinh chỉnh — để dễ nhớ lại.</p>
+    </div>
+    <div class="log">
+      <div class="rel now reveal"><div class="ver">v1.0.10 <span class="pin">mới nhất</span></div><p>Quét ảnh nhanh hơn hẳn — không còn chờ AI khi lập chỉ mục. Trang giới thiệu &amp; tính năng mới.</p></div>
+      <div class="rel reveal"><div class="ver">v1.0.9</div><p>Sửa triệt để viền đen trong Smart Gallery — ảnh tràn ô, đọc đúng tỉ lệ gốc.</p></div>
+      <div class="rel reveal"><div class="ver">v1.0.8</div><p>Smart Gallery bố cục justified kiểu Google Photos: hàng ảnh nhiều kích thước lấp kín màn hình.</p></div>
+      <div class="rel reveal"><div class="ver">v1.0.7</div><p>Mini-player toàn cục · AI crop ảnh theo khuôn mặt · nút “Lấy key AI free” · thẻ “Đang phát” trên trang chủ.</p></div>
+      <div class="rel reveal"><div class="ver">v1.0.6</div><p>Tìm kiếm hợp nhất · phiên âm audio bằng AI · Ký ức “Hôm nay năm ngoái” · trang chủ trực quan · đổi nhóm thành Xem · Nghe · Nhìn.</p></div>
+      <div class="rel reveal"><div class="ver">v1.0.5</div><p>UX 2.0: trang chủ “Hôm nay”, nút Home tròn + thanh điều hướng dạng pill tự ẩn khi cuộn, Smart Gallery kiểu Google Photos, nhập cấu hình Supabase bằng file/QR.</p></div>
+      <div class="rel reveal"><div class="ver">v1.0.4</div><p>Tối ưu dung lượng APK · thanh điều hướng nổi bo tròn · màn giới thiệu lần đầu.</p></div>
+      <div class="rel reveal"><div class="ver">v1.0.3</div><p>🎉 Đủ 10 module: thêm Movie Tracker, Audio Vault, AI Radio, Music Memory, Kids Audio, Smart Gallery, Meme Vault, AI Wallpaper.</p></div>
+      <div class="rel reveal"><div class="ver">v1.0.0 – 1.0.2</div><p>Ra mắt Watch Later Hub + khung app + tự cập nhật; thêm Daily Digest; sửa lỗi luồng cập nhật.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="close">
+  <div class="wrap">
+    <div class="close-card reveal">
+      <div class="eyebrow">Sẵn sàng dùng thử</div>
+      <h2>Gom cả kho media của bạn về một chỗ</h2>
+      <p>Cài trong 1 phút, dùng được ngay — kể cả khi chưa nhập key AI. Cập nhật mới tự báo và tải ngay trong app.</p>
+      <div class="cta-row" style="margin-top:24px">
+        <a class="btn btn-primary" href="me-anything-1.0.10.apk" download>
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="none"><path d="M12 3v12m0 0 4-4m-4 4-4-4M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Tải APK v1.0.10
+        </a>
+      </div>
+      <p class="hint">Android 8+ · tương thích thiết bị mới (trang bộ nhớ 16KB) · cho phép “Cài từ nguồn không xác định” khi cài lần đầu</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    MÊ anything — app cá nhân đa nền tảng · Giao diện tối giản, có dark mode &amp; song ngữ Việt/Anh.<br>
+    <a href="version.json">version.json</a> · Cập nhật trong app tự động khi có bản mới.
+  </div>
+</footer>
+
+<script>
+  (function(){
+    var els = document.querySelectorAll('.reveal');
+    if(!('IntersectionObserver' in window) || matchMedia('(prefers-reduced-motion:reduce)').matches){
+      els.forEach(function(e){e.classList.add('in')});return;
+    }
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){ if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target);} });
+    },{threshold:.12,rootMargin:'0px 0px -8% 0px'});
+    els.forEach(function(e){ io.observe(e); });
+  })();
+</script>
 </body>
 </html>
