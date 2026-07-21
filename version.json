@@ -1,6 +1,6 @@
 {
-  "versionCode": 6,
-  "versionName": "1.0.5",
-  "apkUrl": "https://github.com/mittohoa/meanything-app/raw/main/me-anything-1.0.5.apk",
-  "notes": "v1.0.5 — UX 2.0: Trang chủ 'Hôm nay' (gợi ý + làm nhanh), thanh điều hướng pills mới + nút Home tròn, tự ẩn khi cuộn. Smart Gallery bố cục Google Photos (nhóm theo ngày, thu gọn, ô to/nhỏ). Nhập cấu hình Supabase bằng file/QR. Màn giới thiệu lần đầu."
+  "versionCode": 7,
+  "versionName": "1.0.6",
+  "apkUrl": "https://github.com/mittohoa/meanything-app/raw/main/me-anything-1.0.6.apk",
+  "notes": "v1.0.6 — Tìm kiếm hợp nhất: gõ 1 lần ra kết quả từ video/audio/ảnh/meme/phim. Phiên âm audio bằng AI (tìm được theo lời nói). Ký ức 'Hôm nay năm ngoái' trên trang chủ. Trang chủ thiết kế lại trực quan hơn (thẻ không gian gradient, lối tắt màu). Menu: Xem · Nghe · Nhìn."
 }
