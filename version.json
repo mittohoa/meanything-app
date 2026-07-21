@@ -1,6 +1,6 @@
 {
-  "versionCode": 7,
-  "versionName": "1.0.6",
-  "apkUrl": "https://github.com/mittohoa/meanything-app/raw/main/me-anything-1.0.6.apk",
-  "notes": "v1.0.6 — Tìm kiếm hợp nhất: gõ 1 lần ra kết quả từ video/audio/ảnh/meme/phim. Phiên âm audio bằng AI (tìm được theo lời nói). Ký ức 'Hôm nay năm ngoái' trên trang chủ. Trang chủ thiết kế lại trực quan hơn (thẻ không gian gradient, lối tắt màu). Menu: Xem · Nghe · Nhìn."
+  "versionCode": 8,
+  "versionName": "1.0.7",
+  "apkUrl": "https://github.com/mittohoa/meanything-app/raw/main/me-anything-1.0.7.apk",
+  "notes": "v1.0.7 — Mini-player toàn cục (điều khiển nhạc ở mọi màn) + thẻ 'Đang phát' trên trang chủ. Smart Gallery: hết viền đen, AI crop theo khuôn mặt/trọng tâm, khung ảnh đa dạng. Nút 'Lấy key AI free' 1 chạm."
 }
