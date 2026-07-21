@@ -1,6 +1,6 @@
 {
-  "versionCode": 12,
-  "versionName": "1.0.11",
-  "apkUrl": "https://github.com/mittohoa/meanything-app/raw/main/me-anything-1.0.11.apk",
-  "notes": "v1.0.11 — Smart Gallery: cả 3 kiểu hiển thị (thưa/vừa/dày) đều lấp kín màn hình kiểu Google Photos, không còn ô hở đen. Ảnh tràn ô, crop theo trọng tâm."
+  "versionCode": 13,
+  "versionName": "1.0.12",
+  "apkUrl": "https://github.com/mittohoa/meanything-app/raw/main/me-anything-1.0.12.apk",
+  "notes": "v1.0.12 — Trang chủ gọn hơn: bỏ 3 thẻ trùng với thanh điều hướng, icon Làm nhanh đồng nhất kiểu chip tròn. Smart Gallery: nút Quét thêm theo lô (có badge số ảnh còn lại), quét sâu dần cả thư viện thay vì chỉ ảnh mới nhất."
 }
