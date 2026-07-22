@@ -1,6 +1,6 @@
 {
-  "versionCode": 16,
-  "versionName": "1.0.15",
-  "apkUrl": "https://github.com/mittohoa/meanything-app/releases/download/v1.0.15/me-anything-1.0.15.apk",
-  "notes": "v1.0.15 — Cỗ máy khơi lại: Trang chủ nhắc lại 1 mục bạn lưu lâu mà chưa mở (chống lưu-rồi-quên). Sao lưu & Nhập: xuất video/phim/audio ra file để đổi máy, khôi phục lại, và nhập link từ Pocket / Google Takeout."
+  "versionCode": 17,
+  "versionName": "1.0.16",
+  "apkUrl": "https://github.com/mittohoa/meanything-app/raw/main/me-anything-1.0.16.apk",
+  "notes": "v1.0.16 — APK nhẹ hơn hẳn (nén thư viện native). Thêm nút 'Kiểm tra AI' (Cài đặt → AI) để xem lỗi thật khi key không chạy + 'Làm lại AI mục cũ'. App shortcut (giữ icon) + widget màn hình chính. LƯU Ý: bản này đổi định danh ứng dụng — hãy GỠ bản cũ rồi cài lại, và nhập lại API key."
 }
