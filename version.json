@@ -1,6 +1,6 @@
 {
-  "versionCode": 17,
-  "versionName": "1.0.16",
-  "apkUrl": "https://github.com/mittohoa/meanything-app/raw/main/me-anything-1.0.16.apk",
-  "notes": "v1.0.16 — APK nhẹ hơn hẳn (nén thư viện native). Thêm nút 'Kiểm tra AI' (Cài đặt → AI) để xem lỗi thật khi key không chạy + 'Làm lại AI mục cũ'. App shortcut (giữ icon) + widget màn hình chính. LƯU Ý: bản này đổi định danh ứng dụng — hãy GỠ bản cũ rồi cài lại, và nhập lại API key."
+  "versionCode": 18,
+  "versionName": "1.0.17",
+  "apkUrl": "https://github.com/mittohoa/meanything-app/raw/main/me-anything-1.0.17.apk",
+  "notes": "v1.0.17 — Sửa viền đen ở Smart Gallery (thumbnail sai tỉ lệ bị đệm đen). Thêm nút 'Xóa cache ảnh' trong Gallery (menu ⋮) để tải lại thumbnail đúng tỉ lệ ngay, không cần khởi động lại. Bản này auto-update được từ 1.0.16."
 }
