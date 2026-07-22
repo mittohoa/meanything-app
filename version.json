@@ -1,6 +1,6 @@
 {
-  "versionCode": 15,
-  "versionName": "1.0.14",
-  "apkUrl": "https://github.com/mittohoa/meanything-app/releases/download/v1.0.14/me-anything-1.0.14.apk",
-  "notes": "v1.0.14 — Mỗi nhóm Xem/Nghe/Nhìn giờ là MỘT trang có tab từng module: gọn, hết loạn. Giao diện media-forward hơn (thumbnail + nút play, album art) khắp app. Gợi ý hôm nay gọn còn 1 thẻ. Smart Gallery nhóm ảnh theo ngày kiểu Google Photos (header dính). Thêm export cấu hình Supabase ra file. Mô tả rõ tương thích thiết bị (Android 8+)."
+  "versionCode": 16,
+  "versionName": "1.0.15",
+  "apkUrl": "https://github.com/mittohoa/meanything-app/releases/download/v1.0.15/me-anything-1.0.15.apk",
+  "notes": "v1.0.15 — Cỗ máy khơi lại: Trang chủ nhắc lại 1 mục bạn lưu lâu mà chưa mở (chống lưu-rồi-quên). Sao lưu & Nhập: xuất video/phim/audio ra file để đổi máy, khôi phục lại, và nhập link từ Pocket / Google Takeout."
 }
